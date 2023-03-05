@@ -2,9 +2,12 @@ terraform {
   # Assumes s3 bucket and dynamo DB table already set up
   # See /code/03-basics/aws-backend
   backend "s3" {
+    // bucker where state is stored
     bucket         = "devops-directive-tf-state"
+    // name of file should be created
     key            = "03-basics/web-app/terraform.tfstate"
     region         = "us-east-1"
+    // table for locking before modify state
     dynamodb_table = "terraform-state-locking"
     encrypt        = true
   }
